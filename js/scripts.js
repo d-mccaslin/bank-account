@@ -1,23 +1,30 @@
 //Business Logic
-function BankAccount(deposits, withdrawals) {
+function BankAccount(balance) {
   this.deposits = [],
-  this.withdrawals = []
+  this.withdrawals = [],
+  this.balance = balance;
 }
 
+/*
 BankAccount.prototype.balance = function() {
   let balance = 0;
-  return this.deposits - this.withdrawals
+  //return this.deposits - this.withdrawals
+  console.log(this.deposits);
+} */
+
+BankAccount.prototype.updateBalance = function() {
+  this.balance = this.deposits[this.deposits.length-1].amount;
 }
 
 BankAccount.prototype.addDeposit = function(deposit) {
   this.deposits.push(deposit);
+  this.updateBalance();
 }
 
 
-
-
 function Deposit(amount) {
-  this.amount = amount
+  this.amount = amount,
+  this.timestamp = new Date();
 }
 
 function Withdrawal(amount) {
@@ -25,13 +32,16 @@ function Withdrawal(amount) {
 }
 
 
-
-
-
-
-
+let bankAccount = new BankAccount(0);
 
 //UI Logic
 $(document).ready(function() {
-    let deposits = parseInt($("#deposits").val());
- }
+    $("#bank").submit(function(event) {
+      event.preventDefault();
+      let depositAmount = parseInt($("#depositAmount").val());
+      let newDeposit = new Deposit(depositAmount);
+      bankAccount.addDeposit(newDeposit);
+      
+      console.log(bankAccount);
+    })
+})
