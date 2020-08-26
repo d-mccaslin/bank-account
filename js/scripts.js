@@ -40,12 +40,12 @@ BankAccount.prototype.addWithdrawal = function(withdrawal) {
 
 function Deposit(amount) {
   this.amount = amount,
-  this.timestamp = new Date();
+  this.timestamp = new Date()
 }
 
 function Withdrawal(amount) {
   this.amount = amount,
-  this.timestamp = new Date();
+  this.timestamp = new Date()
 }
 
 // Bug to fix: if starting balance input is empty to start, it messes up our balance
